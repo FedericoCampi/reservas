@@ -1,0 +1,28 @@
+.accordion {
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 20px;
+  transition: 0.5s;
+}
+  
+.accordion:hover {
+  opacity: 0.75;
+}
+.panel {
+  max-height: 0;
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+  overflow: hidden;
+  transition: max-height 0.6s ease;
+  padding: 10px 10px 0 10px;
+}
+
+.panel.active {
+  max-height: 300px;
+  padding: 10px 10px 0 10px;
+}
