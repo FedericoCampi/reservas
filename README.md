@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# challenge-planify
 
-## Getting Started
+## Descripción
 
-First, run the development server:
+Este es el repositorio del proyecto **challenge-planify**, una aplicación para gestionar y planificar tareas. La aplicación utiliza tecnologías modernas como React, Next.js y Tailwind CSS para proporcionar una experiencia de usuario fluida y agradable.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Instalación
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. Clona este repositorio en tu máquina local usando Git:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+-- git clone https://github.com/FedericoCampi/reservas.git
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+2. Ve al directorio del proyecto:
 
-## Learn More
+-- cd challenge-planify
 
-To learn more about Next.js, take a look at the following resources:
+3. Instala las dependencias necesarias usando npm:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+-- npm install
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+4. Una vez que todas las dependencias estén instaladas, puedes iniciar la aplicación en modo de desarrollo usando el siguiente comando:
 
-## Deploy on Vercel
+-- npm run dev
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Esto iniciará un servidor de desarrollo local y podrás ver la aplicación en tu navegador visitando `http://localhost:3000`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+5. Para construir la aplicación para producción, puedes ejecutar el siguiente comando:
+
+-- npm run build
+
+
+*ENLACE A PROYECTO DESPLEGADO:*
+
+-- https://reservas-omega.vercel.app/
+
+
