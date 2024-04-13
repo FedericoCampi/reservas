@@ -92,7 +92,8 @@ export default function Home() {
   }, [showInterfaces, seleccionado]);
 
   return (
-    <main className={`bg-neutral-200 min-h-screen w-full pb-20 ${seleccionado && ' pb-40 '}`}>
+    <div className="flex justify-center bg-neutral-400">
+      <main className={`bg-neutral-200 min-h-screen w-full pb-20 max-w-[500px] ${seleccionado && ' pb-40 '}`}>
       {
         section == 0 ? (
           <div>
@@ -118,7 +119,7 @@ export default function Home() {
           </div>
         ) : (
           appointmentConfirmed == 1 ? (
-            <div className="h-[500px] w-full flex flex-col justify-between">
+            <div className="h-[500px] w-full flex flex-col justify-between pt-16 px-6">
               <div className="border border-1 border-black h-auto w-full px-4 py-5">
                 <p>Service: {service?.name}</p>
                 <p>Date: {fechaFormateada} {selectedSchedule}</p>
@@ -139,7 +140,7 @@ export default function Home() {
           
         )
       }
-          <div className="w-full fixed bottom-0 bg-neutral-200">
+          <div className="fixed-container">
               {
                 seleccionado && section == 0 && showInterfaces !== 3 ? (
                   <div className="w-full flex justify-between px-8 py-2 border-t border-black">
@@ -181,19 +182,21 @@ export default function Home() {
               }
               <div className={`w-full flex justify-center space-x-10 py-1 border-t border-1 border-black`}>
                 <div onClick={() => { setSection(0) }}
-                  className={`flex flex-col items-center ${section == 0 ? 'border-b-2 border-[#1934B6]' : ''}`}
+                  className={`flex flex-col items-center cursor-pointer ${section == 0 ? 'border-b-2 border-[#1934B6]' : ''}`}
                 >
                   <TableCellsIcon width={30} color={section == 0 ? '#1934B6' : ''} />
                   <p className={section == 0 ? 'text-blue-800' : ''}>Reserve</p>
                 </div>
                 <div onClick={() => { setSection(1) }}
-                  className={`flex flex-col items-center ${section == 0 ? '' : 'border-b-2 border-[#1934B6]'}`}
+                  className={`flex flex-col items-center cursor-pointer ${section == 0 ? '' : 'border-b-2 border-[#1934B6]'}`}
                 >
                   <TableCellsIcon width={30} color={section == 0 ? '' : '#1934B6'} />
                   <p className={section == 0 ? '' : 'text-blue-800'}>Appointments</p>
                 </div>
               </div>
             </div>
-    </main>
+        </main>
+    </div>
+    
   );
 }
