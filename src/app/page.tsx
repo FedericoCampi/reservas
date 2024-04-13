@@ -8,6 +8,7 @@ import Categories from "@/components/customComponents.tsx/categories";
 import SelectTime from "@/components/customComponents.tsx/selectTime";
 import { BrowserRouter } from "react-router-dom";
 import Confirm from "@/components/customComponents.tsx/confirm";
+import ShiftConfirmed from "@/components/customComponents.tsx/ShiftConfirmed";
 
 export default function Home() {
 
@@ -60,6 +61,7 @@ export default function Home() {
     if(selectedSchedule){
       setSelectedSchedule(selectedSchedule);
     }
+
   
   },[showInterfaces]);
   
@@ -81,12 +83,12 @@ export default function Home() {
             ) : showInterfaces === 2 ? (
               <Confirm category={selectedCategoryId} schedule={selectedSchedule}/>
             ) : (
-              null
+              <ShiftConfirmed/>
           )}
         </div>
         <div className="w-full fixed bottom-0 bg-neutral-200">
           {
-            seleccionado && (
+            seleccionado && showInterfaces !== 3 ? (
               <div className="w-full flex justify-between px-8 py-2 border-t border-b border-black">
                 {
                   showInterfaces == 0 ? (
@@ -100,7 +102,9 @@ export default function Home() {
                 }
                 {
                   showInterfaces == 2 ? (
-                    <button className="bg-neutral-800 text-white p-2 hover:bg-neutral-500 hover:text-black">
+                    <button onClick={goNext}
+                      className="bg-neutral-800 text-white p-2 hover:bg-neutral-500 hover:text-black"
+                    >
                         Confirm
                     </button>
                   ) : (
@@ -113,6 +117,10 @@ export default function Home() {
                 }
               </div>
               
+            ) : (
+              <div>
+                
+              </div>
             )
           }
           <div className="w-full flex justify-center space-x-10 py-1">
@@ -126,6 +134,7 @@ export default function Home() {
             </div>
           </div>
         </div>
+        
       </BrowserRouter>
     </main>
   );
