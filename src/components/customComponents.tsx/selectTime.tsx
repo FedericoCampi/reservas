@@ -70,7 +70,7 @@ const SelectTime = ({ onSelectSchedule }: ScheduleProps) => {
         });
         setMorningSlots(morningList);
         setAfternoonSlots(afternoonList);
-    },[]);
+    },[onSelectSchedule]);
     
     return(
         <div className="border border-1 border-black h-auto w-full px-4 py-3 space-y-2">

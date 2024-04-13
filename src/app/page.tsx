@@ -73,7 +73,7 @@ export default function Home() {
       
     }
 
-  },[showInterfaces]);
+  },[showInterfaces, seleccionado]);
 
   return (
     <main className={`bg-neutral-200 min-h-screen w-full pb-20 ${seleccionado && ' pb-40 '}`}>
