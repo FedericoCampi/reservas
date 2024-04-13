@@ -29,7 +29,7 @@ Esto iniciará un servidor de desarrollo local y podrás ver la aplicación en t
 -- npm run build
 
 
-*ENLACE A PROYECTO DESPLEGADO:*
+## *ENLACE A PROYECTO DESPLEGADO:*
 
 -- https://reservas-omega.vercel.app/
 
