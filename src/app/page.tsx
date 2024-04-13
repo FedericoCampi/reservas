@@ -1,12 +1,12 @@
 'use client'
 
 import { Progress } from "@/components/ui/progress"
+
 import { TableCellsIcon } from "@heroicons/react/16/solid";
 import '@/styles/accordion.css'
 import { useEffect, useState } from "react";
 import Categories from "@/components/customComponents.tsx/categories";
 import SelectTime from "@/components/customComponents.tsx/selectTime";
-import { BrowserRouter } from "react-router-dom";
 import Confirm from "@/components/customComponents.tsx/confirm";
 import ShiftConfirmed from "@/components/customComponents.tsx/ShiftConfirmed";
 
@@ -49,25 +49,32 @@ export default function Home() {
       setSeleccionado(false);
     }
 
-    const queryParams = new URLSearchParams(window.location.search);
-    const selectedCategory = Number(queryParams.get('category'));
+    if (typeof window !== 'undefined') {
 
-    const selectedSchedule = queryParams.get('slot');
+      if (showInterfaces === 0 && !seleccionado) {
+        setSeleccionado(false);
+      }
+      // const queryParams = new URLSearchParams(router.asPath.split('?')[1]); // Utilizamos router.asPath en lugar de window.location.search
+      //   const selectedCategory = Number(queryParams.get('category'));
+      const queryParams = new URLSearchParams(window.location.search);
+      const selectedCategory = Number(queryParams.get('category'));
 
-    if (selectedCategory > 0) {
-        setSeleccionado(true);
-        setSelectedCategoryId(selectedCategory);
+      const selectedSchedule = queryParams.get('slot');
+
+      if (selectedCategory > 0) {
+          setSeleccionado(true);
+          setSelectedCategoryId(selectedCategory);
+      }
+      if(selectedSchedule){
+        setSelectedSchedule(selectedSchedule);
+      }
     }
-    if(selectedSchedule){
-      setSelectedSchedule(selectedSchedule);
-    }
 
-  
   },[showInterfaces]);
-  
+
   return (
     <main className={`bg-neutral-200 min-h-screen w-full pb-20 ${seleccionado && ' pb-40 '}`}>
-      <BrowserRouter>
+      
         <div className="h-[15%] w-full">
             <div className="p-6">
               <p>{titles[showInterfaces]}</p>
@@ -75,7 +82,7 @@ export default function Home() {
           </div>
         </div>
         <div className="h-[65%] w-full px-8">
-          
+
           {showInterfaces === 0 ? (
               <Categories onSelectChange={handleSelectChange}/>
             ) : showInterfaces === 1 ? (
@@ -116,10 +123,10 @@ export default function Home() {
                   )
                 }
               </div>
-              
+
             ) : (
               <div>
-                
+
               </div>
             )
           }
@@ -134,8 +141,8 @@ export default function Home() {
             </div>
           </div>
         </div>
-        
-      </BrowserRouter>
+
+      
     </main>
   );
 }

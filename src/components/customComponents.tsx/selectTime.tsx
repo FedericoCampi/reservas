@@ -3,12 +3,15 @@
 import slots from '@/mocks/slots.json';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 
 interface ScheduleProps {
     onSelectSchedule: (schedule: string) => void;
 }
 
 const SelectTime = ({ onSelectSchedule }: ScheduleProps) => {
+
+    const router = useRouter();
 
     const date = slots.date;
     const dateObject = new Date(date);
@@ -23,30 +26,34 @@ const SelectTime = ({ onSelectSchedule }: ScheduleProps) => {
     const [selectedTime, setSelectedTime] = useState(false);
 
     const [selectedSlot, setSelectedSlot] = useState('');
-    const navigate = useNavigate();
 
     const handleSelectSlot = (slot:string) => {
         
-        const currentParams = new URLSearchParams(window.location.search);
-        currentParams.set('slot', slot); 
-        const newUrl = `${window.location.pathname}?${currentParams.toString()}`;
+        if (typeof window !== 'undefined') {
+            const currentParams = new URLSearchParams(window.location.search);
+            currentParams.set('slot', slot);
+            const newUrl = `${window.location.pathname}?${currentParams.toString()}`;
 
-        setSelectedSlot(slot);
-        onSelectSchedule(slot);
-        setSelectedTime(true);
-        navigate(newUrl);
+            setSelectedSlot(slot);
+            onSelectSchedule(slot);
+            setSelectedTime(true);
+            router.push(newUrl);
+        }
     };
 
     useEffect(() => {
 
-        const queryParams = new URLSearchParams(window.location.search);
-        const selectedSchedule = queryParams.get('slot');
-
-        if(selectedSchedule){
-            setSelectedTime(true);
-            setSelectedSlot(selectedSchedule);
-            onSelectSchedule(selectedSchedule);
+        if (typeof window !== 'undefined') {
+            const queryParams = new URLSearchParams(window.location.search);
+            const selectedSchedule = queryParams.get('slot');
+    
+            if(selectedSchedule){
+                setSelectedTime(true);
+                setSelectedSlot(selectedSchedule);
+                onSelectSchedule(selectedSchedule);
+            }
         }
+        
         const morningList: string[] = [];
         const afternoonList: string[] = [];
 

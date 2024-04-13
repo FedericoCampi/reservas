@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useEffect, useState } from 'react';
 import {
     Accordion,
@@ -6,7 +8,7 @@ import {
     AccordionTrigger,
 } from "@/components/ui/accordion"
 import servicesData from '@/mocks/services.json';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 
 interface CategoriesProps {
     onSelectChange: (categoryId: number) => void;
@@ -14,7 +16,9 @@ interface CategoriesProps {
 
 const Categories = ({ onSelectChange }: CategoriesProps) => {
 
-    const navigate = useNavigate();
+    const router = useRouter();
+  
+    // const navigate = useNavigate();
     const categories = Array.from(new Set(servicesData.services.map(service => service.category)));
     const dataServicios = servicesData.services;
     const [seleccionado, setSeleccionado] = useState(false);
@@ -26,16 +30,18 @@ const Categories = ({ onSelectChange }: CategoriesProps) => {
           setSelectedService(0);
           setSeleccionado(false);
           onSelectChange(0);
-          navigate('/');
+          router.push('/');
         }else{
           setSelectedService(servicioId);
           setSeleccionado(true);
           onSelectChange(servicioId);
-          navigate(`/?category=${servicioId}`);
+          router.push(`/?category=${servicioId}`);
         }
     }
 
     useEffect(() => {
+
+      if (typeof window !== 'undefined') {
         const queryParams = new URLSearchParams(window.location.search);
         const selectedCategory = Number(queryParams.get('category'));
         if (selectedCategory) {
@@ -43,6 +49,8 @@ const Categories = ({ onSelectChange }: CategoriesProps) => {
             setSeleccionado(true);
             onSelectChange(selectedCategory);
         }
+      }
+        
     }, []);
 
     return (
