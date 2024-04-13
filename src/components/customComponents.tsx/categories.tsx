@@ -51,7 +51,7 @@ const Categories = ({ onSelectChange }: CategoriesProps) => {
         }
       }
         
-    }, []);
+    }, [onSelectChange]);
 
     return (
         <div className="border border-1 border-black h-auto w-full px-4 py-5">
