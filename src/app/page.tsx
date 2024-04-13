@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import Categories from "@/components/customComponents.tsx/categories";
 import SelectTime from "@/components/customComponents.tsx/selectTime";
 import { BrowserRouter } from "react-router-dom";
+import Confirm from "@/components/customComponents.tsx/confirm";
 
 export default function Home() {
 
@@ -15,6 +16,8 @@ export default function Home() {
   const [selectTime, setSelectTime] = useState(false);
   const titles = ['Select service', 'Select schedule', 'Confirm shift'];
   const [selectedCategoryId, setSelectedCategoryId] = useState(0);
+  const [selectedSchedule, setSelectedSchedule] = useState('');
+  const progress = [25, 50, 75, 100];
 
   const handleSelectChange = (categoryId:number) => {
     if(categoryId == 0){
@@ -23,6 +26,12 @@ export default function Home() {
       setSeleccionado(true);
     }
     setSelectedCategoryId(categoryId);
+  };
+
+  const handleSelectSchedule= (schedule:string) => {
+    if(schedule !== ''){
+      setSelectTime(true)
+    }
   };
 
   const goBack = () => {
@@ -34,18 +43,33 @@ export default function Home() {
   };
 
   useEffect(() => {
+
     if(showInterfaces == 0 && seleccionado == false){
       setSeleccionado(false);
     }
-  },[showInterfaces]);
 
+    const queryParams = new URLSearchParams(window.location.search);
+    const selectedCategory = Number(queryParams.get('category'));
+
+    const selectedSchedule = queryParams.get('slot');
+
+    if (selectedCategory > 0) {
+        setSeleccionado(true);
+        setSelectedCategoryId(selectedCategory);
+    }
+    if(selectedSchedule){
+      setSelectedSchedule(selectedSchedule);
+    }
+  
+  },[showInterfaces]);
+  
   return (
     <main className={`bg-neutral-200 min-h-screen w-full pb-20 ${seleccionado && ' pb-40 '}`}>
       <BrowserRouter>
         <div className="h-[15%] w-full">
             <div className="p-6">
               <p>{titles[showInterfaces]}</p>
-              <Progress value={80} />
+              <Progress value={progress[showInterfaces]} />
           </div>
         </div>
         <div className="h-[65%] w-full px-8">
@@ -53,9 +77,9 @@ export default function Home() {
           {showInterfaces === 0 ? (
               <Categories onSelectChange={handleSelectChange}/>
             ) : showInterfaces === 1 ? (
-              <SelectTime />
+              <SelectTime onSelectSchedule={handleSelectSchedule}/>
             ) : showInterfaces === 2 ? (
-              <div>Elemento 3</div>
+              <Confirm category={selectedCategoryId} schedule={selectedSchedule}/>
             ) : (
               null
           )}
@@ -74,17 +98,25 @@ export default function Home() {
                     </button>
                   )
                 }
-                <button onClick={goNext}
-                  disabled={selectTime == false && showInterfaces !== 0}
-                  className={`${selectTime == false && showInterfaces !== 0 ? 'bg-neutral-400 text-black p-2' : 'bg-neutral-800 text-white p-2 hover:bg-neutral-500 hover:text-black'} '`}>
-                  Next
-                </button>
+                {
+                  showInterfaces == 2 ? (
+                    <button className="bg-neutral-800 text-white p-2 hover:bg-neutral-500 hover:text-black">
+                        Confirm
+                    </button>
+                  ) : (
+                    <button onClick={goNext}
+                      disabled={selectTime == false && showInterfaces !== 0}
+                      className={`${selectTime == false && showInterfaces !== 0 ? 'bg-neutral-400 text-black p-2' : 'bg-neutral-800 text-white p-2 hover:bg-neutral-500 hover:text-black'} '`}>
+                        Next
+                    </button>
+                  )
+                }
               </div>
               
             )
           }
           <div className="w-full flex justify-center space-x-10 py-1">
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center border-b-2 border-[#1934B6]">
               <TableCellsIcon width={30} color={'#1934B6'}/>
               <p className="text-blue-800">Reserve</p>
             </div>
