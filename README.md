@@ -1,5 +1,9 @@
 # challenge-planify
 
+## *ENLACE A PROYECTO DESPLEGADO:*
+
+-- https://reservas-omega.vercel.app/
+
 ## Descripción
 
 Este es el repositorio del proyecto **challenge-planify**, una aplicación para gestionar y planificar tareas. La aplicación utiliza tecnologías modernas como React, Next.js y Tailwind CSS para proporcionar una experiencia de usuario fluida y agradable.
@@ -28,9 +32,5 @@ Esto iniciará un servidor de desarrollo local y podrás ver la aplicación en t
 
 -- npm run build
 
-
-## *ENLACE A PROYECTO DESPLEGADO:*
-
--- https://reservas-omega.vercel.app/
 
 
