@@ -45,15 +45,12 @@ export default function Home() {
 
   useEffect(() => {
 
-    if(showInterfaces == 0 && seleccionado == false){
-      setSeleccionado(false);
-    }
+    // if(showInterfaces == 0 && seleccionado == false){
+    //   setSeleccionado(false);
+    // }
 
     if (typeof window !== 'undefined') {
 
-      if (showInterfaces === 0 && !seleccionado) {
-        setSeleccionado(false);
-      }
       // const queryParams = new URLSearchParams(router.asPath.split('?')[1]); // Utilizamos router.asPath en lugar de window.location.search
       //   const selectedCategory = Number(queryParams.get('category'));
       const queryParams = new URLSearchParams(window.location.search);
@@ -64,10 +61,16 @@ export default function Home() {
       if (selectedCategory > 0) {
           setSeleccionado(true);
           setSelectedCategoryId(selectedCategory);
+
+          if(selectedSchedule){
+            setSelectedSchedule(selectedSchedule);
+          }
+      }else{
+        if (showInterfaces === 0 && !seleccionado) {
+          setSeleccionado(false);
+        }
       }
-      if(selectedSchedule){
-        setSelectedSchedule(selectedSchedule);
-      }
+      
     }
 
   },[showInterfaces]);
